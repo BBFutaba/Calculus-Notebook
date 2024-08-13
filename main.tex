@@ -1,0 +1,698 @@
+\documentclass[12pt]{book}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{latexsym, epsfig, ulem, cancel, multicol, hyperref}
+\usepackage{graphicx, tikz, subfigure,pgfplots}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\setlength{\parindent}{0pt}
+\usepackage{multirow}
+\usepackage{mathtools}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepackage{esint}
+\usepackage{authblk}
+
+\title{A Calculus Note}
+\author{Dennis Li \and Manu Dorghabekov}
+\date{}
+
+
+
+\newcommand{\liminfty}[1]{\lim_{#1 \to \infty}}
+\newcommand{\limzero}[1]{\lim_{#1 \to 0}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\lineint}[1]{\int_{#1}}
+\newcommand{\pypx}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\divg}{\nabla \cdot}
+\newcommand{\curl}{\nabla \times}
+\newcommand{\dydx}[2]{\frac{d #1}{d #2}}
+\newcommand{\sqbkt}[1]{\left[ #1 \right]}
+\newcommand{\paren}[1]{\left( #1 \right)}
+\newcommand{\tribkt}[1]{\left< #1 \right>}
+\newcommand{\abso}[1]{\left|#1 \right|}
+
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter{Calculus of Single Variable}
+
+\section{Limits of Real Functions}
+
+\subsection{Common Limits}
+
+\[
+\liminfty{x} \frac{x^{n-1} +c}{x^n + k} = 0 \;\;\;
+\begin{cases}
+    n \in + \mathbb{Z} \\
+    c,k \in \mathbb{R}
+\end{cases}
+\]
+\[
+\liminfty{x} \frac{x^n +c}{x^{n+1}+k} = \infty \;\;\; 
+\begin{cases}
+    n \in + \mathbb{Z} \\
+    c,k \in \mathbb{R}
+\end{cases}
+\]
+\[
+\limzero{x} \frac{\sin x}{x} = 1
+\]
+\[
+\limzero{x} \frac{1 - \cos x}{x} =0
+\]
+\[
+\limzero{x} \frac{e^x-1}{x} = 1
+\]
+\[
+\liminfty{x} \left( 1 + \frac{1}{x}\right)^{\frac{1}{x}} = e
+\]
+\[
+\limzero{x} (1+x)^{\frac{1}{x}} = e
+\]
+\[
+\limzero{x} (1+\sin x)^{\frac{1}{x}} = e
+\]
+
+\section{Derivatives of Real Functions}
+\subsection{Limit Definition of Derivatives}
+\[
+f'(x) = \limzero{h} \frac{f(x+h) - f(x)}{h}
+\]
+\subsection{Rules of Derivatives}
+The linear nature of the derivative operator
+\[
+\dydx{}{x} \sqbkt{cf(x)} = cf'(x) \;\;\; c\in \R
+\]
+\[
+\dydx{}{x} \sqbkt{f(x) \pm g(x)} = f'(x) \pm g(x) 
+\]
+Chain Rule
+\[
+\dydx{}{x}f\left( g(x) \right) = f'\left( g(x) \right)g'(x)
+\]
+Product Rule
+\[
+\dydx{}{x} \left[  f(x)g(x)  \right] = f'(x)g(x) + f(x)g'(x)
+\]
+Quotient Rule
+\[
+\dydx{}{x} \left[ \frac{f(x)}{g(x)} \right] = \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}
+\]
+\subsection{Common Derivatives}
+\subsubsection{Regular Derivatives}
+\[
+\dydx{}{x} c = 0 \;\;\; c\in\R
+\]
+\[
+\dydx{}{x} x^n = nx^{n-1} \;\;\; n \in \R
+\]
+\[
+\dydx{}{x} e^{ax} = ae^{ax}
+\]
+\[
+\dydx{}{x} a^x = \ln{a}a^x
+\]
+\[
+\dydx{}{x} \ln{|x|} = \frac{1}{x} \;\;\; x\neq 0
+\]
+\[
+\dydx{}{x} \log_a x = \frac{1}{x\ln{a}} \;\;\; x>0
+\]
+\subsubsection{Hyperbolic Trigonometric Derivatives}
+\[
+\dydx{}{x} \sinh{x} = \cosh{x}
+\]
+\subsubsection{Trigonometric Derivatives}
+\[
+\dydx{}{x}\sin x = \cos x \;\;\; \dydx{}{x} \cos x = -\sin x
+\]
+\[
+\dydx{}{x} \tan x = \sec ^2 x \;\;\; \dydx{}{x} \sec x = \sec x \tan x
+\]
+\[
+\dydx{}{x} \cot x = - \csc ^2 x \;\;\; \dydx{}{x} \csc x = -\csc x \cot x
+\]
+\[
+\dydx{}{x}  \arcsin x = \frac{1}{\sqrt{1-x^2}} \;\;\; \dydx{}{x} \arccos x =- \frac{1}{\sqrt{1-x^2}}
+\]
+\[
+\dydx{}{x} \arctan x = \frac{1}{1+x^2} \;\;\; \dydx{}{x}\text{arccot } x = -\frac{1}{1+x^2}
+\]
+\[
+\dydx{}{x} \sec ^{-1} x = \frac{1}{|x| \sqrt{x^2-1}} \;\;\; \dydx{}{x} \csc ^{-1} x =  - \frac{1}{|x| \sqrt{x^2-1}}
+\]
+\section{Integrals of a Single Variable}
+\subsection{Fundamental Theorem of Calculus}
+
+\[
+\int_{a}^{b} f(x) dx = F(b) - F(a) \;\;\; \text{where} \;\;\; \dydx{}{x} F(x) = f(x)
+\]
+\[
+\int f(x) dx = F(x) + c \;\;\; c \ \in \R
+\]
+\[
+\int_{-\infty}^{\infty} f(x) dx = \liminfty{b} F(b) - \lim_{a \to -\infty} F(a)
+\]
+\subsection{Properties of Integrals}
+\[
+\int_{a}^{b} cf(x) dx = c\int_{a}^{b} f(x) dx \;\;\; c \in \R
+\]
+\[
+\int_{a}^{b} f(x) \pm g(x) dx = \int_{a}^{b} f(x) dx \pm \int_{a}^{b} g(x) dx
+\]
+\[
+\int_{a}^{b} f(x) dx = \int_{a}^{c} f(x) dx + \int_{c}^{b} f(x) dx
+\]
+\[
+\int_{a}^{a} f(x) dx = 0
+\]
+\[
+\int_{a}^{b} f(x) dx = - \int_{b}^{a} f(x) dx
+\]
+\subsection{Common Integrals}
+\[
+\int_{-\infty}^{\infty} e^{-x^2} dx= \sqrt{\pi}
+\]
+\[
+\int \ln{x} \;dx = x\ln{x} - x +c
+\]
+\[
+\int \frac{1}{a^2 + x^2} \; dx = \frac{1}{a} \tan^{-1} {\paren{\frac{x}{a}}} + c
+\]
+\[
+\int \frac{1}{\sqrt{a^2 -x^2}} \; dx = \sin ^{-1} \paren{\frac{x}{a}} +c
+\]
+\subsection{Integration Methods}
+\subsubsection{Integration by parts}
+\[
+\int udv = uv - \int vdu
+\]
+\subsubsection{Trig substitution}
+\[
+\sqrt{a^2 - b^2x^2} \Rightarrow x = \frac{a}{b}\sin{\theta} \Rightarrow \cos^2 \theta = 1- \sin ^2 \theta
+\]
+\[
+\sqrt{b^2x^2 - a^2} \Rightarrow x = \frac{a}{b}\sec{\theta} \Rightarrow \tan^2 \theta =  \sec ^2 \theta -1
+\]
+\[
+\sqrt{a^2 + b^2x^2} \Rightarrow x = \frac{a}{b}\tan{\theta} \Rightarrow \sec^2 \theta =  \tan ^2 \theta +1
+\]
+\subsubsection{Partial fraction decomposition}
+Apply to
+\[
+\int \frac{P(x)}{Q(x)} \; dx
+\]
+\[
+Q(x) = \paren{ax+b}^n \Rightarrow \frac{A_1}{ax+b} + \frac{A_2}{\paren{ax+b}^2} \ldots +\frac{A_n}{\paren{ax+b}^n}
+\]
+\[
+Q(x) = \paren{ax^2+bx+c}^n \Rightarrow \frac{A_1x+B_1}{ax^2+bx+c} + \frac{A_2x+B_2}{\paren{ax^2+bx+c}^2} \ldots +\frac{A_nx+B_n}{\paren{ax^2+bx+c}^n}
+\]
+\subsubsection{I Integration Trick}
+\[
+I=\int_{-\infty}^{\infty} e^{-x^2} \; dx
+\]
+\[
+I^2 = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} e^{-\paren{x^2+y^2}} \; dxdy
+\]
+\[
+I^2 = \int_{0}^{2\pi}\int_{0}^{\infty} re^{-r^2} drd\theta = \pi
+\]
+\[
+I = \sqrt{\pi}
+\]
+\section{Series and Taylor Series Expansion}
+\subsection{Definition}
+The Taylor series expansion of a function at point $a$ can be expressed as 
+\[
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n
+\]
+\subsection{Taylor Series of Common Functions}
+\[
+e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\ldots
+\]
+\[
+\sin x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!}=x-\frac{x^3}{3!}+\frac{x^5}{5!} - \ldots
+\]
+\[
+\cos x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!}=1-\frac{x^2}{2!}+\frac{x^4}{4!}- \ldots
+\]
+\[
+\frac{1}{1-x} = \sum_{n=0}^{\infty} x^n \; \iff \; \{-1 < x < 1\}
+\]
+\[
+(1+x)^p = \sum_{n=0}^{\infty} {p \choose x} x^n \;\;\; {p \choose n} = \frac{p!}{n!(p-n)!}
+\]
+\subsection{Common Infinite Sum}
+\[
+\sum_{k=m}^{n} z^k = \frac{z^m - z^{n+1}}{1-z}
+\]
+\[
+\sum_{k=0}^{n} z^k = \frac{1 - z^{n+1}}{1-z}
+\]
+\[
+\sum_{k=0}^{\infty} \frac{z^k}{k!} = e
+\]
+\[
+\sum_{k=0}^{\infty} \frac{kz^k}{k!} = ze^z
+\]
+\[
+\sum_{k=0}^{n} {n \choose k} = 2^n
+\]
+\[
+\sum_{k=0}^{n} {n \choose k}^2 = {2n \choose n}
+\]
+
+
+\chapter{Multivariable Calculus}
+
+\section{Multi-Dimensional Space}
+\subsection{Notation}
+In this section, $|\textbf{x}|$ would mean the magnitude of a vector, and \textbf{bold font} letter will denote a vector.\\
+\newline
+i.e. $\textbf{v}$ is a vector, and $|\textbf{v}|$ is its magnitude. 
+\subsection{Vectors and coordinates}
+\subsubsection{Definition}
+A vector in space with dimension $n$ is defined as follows
+\[
+\forall \textbf{v} \in \R^n, \; n \in +\Z, \;\;\; \textbf{v}= \paren{
+\begin{matrix}
+    v_1\\
+    v_2\\
+    \vdots\\
+    v_n
+\end{matrix}
+}
+\]
+Alternative notation for a vector
+\[
+\textbf{v} = \tribkt{v_1, v_2,\ldots,v_n}
+\]
+\subsubsection{Magnitude of a vector}
+The magnitude of a vector is defined as follows
+\[
+\abso{\textbf{v}}=\textbf{v} \cdot \textbf{v} = \textbf{v}^T\textbf{v}=\sqrt{v_1^2 +v_2^2\ldots +v_n^2}
+\]
+\subsubsection{Unit vectors}
+Unit vectors are vectors with magnitude of $1$, and are orthogonal to each other. For a space of $\R^3$, the unit vectors are
+\[
+\textbf{i} = \tribkt{1,0,0}
+\]
+\[
+\textbf{j} = \tribkt{0,1,0}
+\]
+Some properties
+\[
+\textbf{i}\cdot \textbf{j} = 0
+\]
+Dot products between different unit vectors yields zero
+\[
+\textbf{i} \times \textbf{j} = \textbf{k} \;,\; \textbf{j} \times \textbf{i} = -\textbf{k}
+\]
+\[
+\textbf{j} \times \textbf{k} = \textbf{i} \;,\; \textbf{k} \times \textbf{j} = -\textbf{i}
+\]
+\[
+\textbf{k} \times \textbf{i} = \textbf{j} \;,\; \textbf{i} \times \textbf{k} = -\textbf{j}
+\]
+Cross products between unit vectors are as above. 
+
+\subsubsection{Dot Product}
+The dot product of a vector is defined as follows
+\[
+\forall \textbf{u},\textbf{v} \in \R^n, \;\;\; \textbf{u}\cdot \textbf{v} = u_1v_1 + u_2v_2 \ldots + u_nv_n
+\]
+notable properties
+\[
+\textbf{u}\cdot \textbf{v} = \textbf{v} \cdot \textbf{u}
+\]
+Dot products yields scalar. It means how much these 2 vectors works together. It can also be calculated as
+\[
+\textbf{u}\cdot \textbf{v} = |\textbf{u}||\textbf{v}|\cos{\theta}
+\]
+Where $\theta$ is the angle between the 2 vector.\\
+\newline
+Let the dot product of 2 vectors be denoted by $k$, it has several information about the original vectors
+\[
+\begin{cases}
+    k<0 \rightarrow \text{opposite direction}\\
+    k=0 \rightarrow \text{orthogonal}\\
+    k>0 \rightarrow \text{same direction}\\
+\end{cases}
+\]
+
+\subsubsection{Cross Product}
+For our purpose of calculus, we only define cross product for vectors in $\R^3$
+\[
+\textbf{u} = \tribkt{x,y,z} \;\;\; \textbf{v} = \tribkt{P,Q,R}
+\]
+And then the cross product is defined as a determinant of this matrix
+\[
+\textbf{u} \times \textbf{v} = 
+\abso{
+\begin{matrix}
+    i&j&k\\
+    x&y&z\\
+    P&Q&R
+\end{matrix}
+}= \paren{Ry-Qz}\textbf{i} - \paren{Rx-Pz}\textbf{j} + \paren{Qx-Py}\textbf{k}
+\]
+or with vector notation
+\[
+\textbf{u}\times\textbf{v}=\tribkt{Ry-Qz,\; Rx-Pz,\; Qx-Py}
+\]
+\subsubsection{Normalizing a vector}
+Normalizing a vector means to make it such that its dot product is $1$. And to obtain that we simply do
+\[
+\hat{\textbf{v}} = \frac{\textbf{v}}{\abso{\textbf{v}}}
+\]
+$\hat{\textbf{v}}$ means the normalized vector or $\textbf{v}$.
+\subsubsection{Projection}
+A vector can be projected onto another vector with the following operation
+\[
+\textbf{P}_\textbf{u} = \frac{ \textbf{v}^T \textbf{u} }{ \textbf{v}^T\textbf{v}}\textbf{v} = \frac{\textbf{v}\cdot \textbf{u}}{\abso{\textbf{v}}}\textbf{v}
+\]
+$\textbf{P}_\textbf{u}$ is the projection of $\textbf{u}$ on $\textbf{v}$
+
+\section{Vector Functions}
+\subsection{Vector Function}
+A curve in 3-space can be expressed as a vector whose components are a function of a single variable. The curve is the trace that the vector would leave in the domain for $t$.
+\[
+\textbf{r}(t) = \tribkt{f(t),g(t),h(t)}
+\]
+If the \textit{curve} is a straight line, it can also be expressed as
+\[
+\textbf{r}(t) = \tribkt{x_0,y_0,z_0} + t\tribkt{a,b,c} 
+\]
+Where $a,b,c$ are constants, representing the slope of the line, and $x_0,y_0,z_0$ is the point which the line crosses. \\
+\newline
+Curves can also be expressed in a way as demonstrated below
+\[
+x^2+y^2=1
+\]
+This is a circle in on the xy-plane $(z=0)$. And it can be parameterized to a single variable vector function
+\[
+\textbf{r}(t) = \tribkt{\cos t, \sin t, 0}
+\]
+Taking derivatives of a vector function is straight forward.
+\[
+\text{let }\textbf{r}(t) = \tribkt{f(t),g(t),h(t)}
+\]
+\[
+\text{then } \textbf{r}'(t) = \tribkt{f'(t),g'(t),h'(t)}
+\]
+\[
+\text{and } \int \textbf{r}'(t) dt = \tribkt{f(t),g(t),h(t)} + \textbf{C}
+\]
+Where $\textbf{C}$ is a vector of 3 components that contains all 3 integration constants. 
+
+\subsection{Arc length of curve}
+The arc length of a generic vector function $\textbf{r}(t) = \tribkt{f(t),g(t),h(t)}$ can be calculated as 
+\[
+\int_{a}^{b} \abso{\textbf{r}'(t)} dt
+\]
+And a function that gives you the arc length would simply be 
+\[
+s(x) = \int_{a}^{x} \abso{\textbf{r}'(t)} dt
+\]
+\subsection{Curvature of a curve}
+To obtain the curvature, we have to go through the following process.\\
+\newline
+First, find
+\[
+s(x) = \int_{a}^{x} \abso{\textbf{r}'(t)} dt
+\]
+Secondly, find $x(s)$, or the inverse of the arc length function.\\
+\newline
+Thirdly, we find the tangent vector
+\[
+\textbf{T} = \frac{\textbf{r}'(t)}{\abso{\textbf{r}'(t)}} 
+\]
+Fourth step, we find \textbf{T} in terms of \textbf{s}, and lastly the curvature can be given by
+\[
+\kappa = \abso{\frac{d\textbf{T}(s)}{ds}}=\frac{\|\mathbf{r}'(t) \times \mathbf{r}''(t)\|}{\|\mathbf{r}'(t)\|^3}
+\]
+\subsection{Find Osculating Plane}
+A Osculating Plane can be found with a bit more steps. We starts with 
+\[
+\textbf{T} = \frac{\textbf{r}'(t)}{\abso{\textbf{r}'(t)}} 
+\]
+Then, we find the unit normal vector to the tangent vector
+\[
+\textbf{N} = \frac{\textbf{T}'}{\abso{\textbf{T}'}}
+\]
+We then find the binormal vector, which will be the normal vector of the osculating plane. 
+\[
+\textbf{B} = \textbf{T} \times \textbf{N}
+\]
+\section{Multivariable Function}
+A multivariable function is a function with multiple variable. Examples being
+\[
+f(x,y,z) = x+y+z
+\]
+\[
+g(x,y) = cosx+siny
+\]
+
+\subsection{Notations}
+\[
+\pypx{}{x}f(x,y) = f_x(x,y) \;\;\; \pypx{}{y}f(x,y) = f_y(x,y) 
+\]
+\[
+\pypx{^2}{x^2}f(x,y) = f_{xx}(x,y)  \;\;\; \pypx{^2}{y^2}f(x,y) = f_{yy}(x,y) 
+\]
+\[
+\pypx{}{x \partial y} = f_{xy}(x,y)  \;\;\; \pypx{}{y \partial x} = f_{yx}(x,y) 
+\]
+\[
+\textbf{F}(x,y,z) = \Vec{F}(x,y,z)
+\]
+\subsection{Basic Partial Derivative Properties}
+\[
+\dydx{}{x} f(x,y) = Undefined
+\]
+\[
+\pypx{}{x} f(x,y) = f_x(x) \;\;\; \pypx{^2}{x^2} f(x,y) = f_{xx} (x,y)
+\]
+\[
+\pypx{}{y} f(x,y) = f_y(y) \;\;\; \pypx{^2}{y^2} f(x,y) = f_{yy} (x,y)
+\]
+\subsubsection{Commutativity of partial derivative}
+If $f(x,y)$ is defined in a disk $D$, and $f_xy,f_yx$ are continuous in $D$, then
+\[
+f_xy = f_yx
+\]
+\subsection{Directional Derivative}
+Let $\textbf{u} = \tribkt{a,b}$ be a unit vector, then the directional derivative is of a function $f(x,y)$ can be expressed as 
+\[
+D_\textbf{u}f(x,y) = \tribkt{f_x,f_y}\cdot \tribkt{a,b}
+\]
+
+\subsection{Chain Rule in Partial Derivatives}
+\[
+z = f(x,y) \;\;\ \; x = g(t) \;\;\; y = h(t)
+\]
+\[
+\dydx{z}{t} = \pypx{f}{x}\dydx{x}{t} + \pypx{f}{y}\dydx{y}{t}
+\]
+\subsection{Gradient}
+A gradient of a multivariable function is a vector field that describes how this function is changing. It gives you the rate of change on all direction throughout the function. 
+\[
+\nabla f(x,y,z) = \textbf{F}(x,y,z)=\tribkt{ \pypx{f}{x}, \pypx{f}{y}, \pypx{f}{z}}
+\]
+A special property is that, the vector field that is obtained this way will produce vectors that is perpendicular to the level curve of the function. 
+
+\subsection{Jacobian}
+Suppose a function $f(x,y,z) = P+Q+R$, where $P,Q,R$ are functions of $x,y,z$, then we can obtain its Jacobian matrix by
+\[
+\begin{bmatrix}
+    P_x & P_y & P_z\\
+    Q_x & Q_y & Q_z\\
+    R_x & R_y & R_z
+\end{bmatrix}
+\]
+Taking the determinant, we can obtain the \textbf{Jacobian} by taking the determinant of the matrix
+\[
+\mathbf{J} = \abso{
+\begin{matrix}
+    P_x & P_y & P_z\\
+    Q_x & Q_y & Q_z\\
+    R_x & R_y & R_z
+\end{matrix}
+}
+\]
+
+
+\subsection{Optimization}
+If we want to find the max and min of a multivariable function
+
+
+\section{Vector Calculus}
+\subsection{Vector Field}
+We say a vector field is conservative if
+\[
+\textbf{F}(x,y,z) = \nabla f(x,y,z)
+\]
+we call $f(x,y,z)$ the \textbf{potential} of $\textbf{F}$
+
+\subsection{Divergence and Curl}
+\[
+\textbf{F}(x,y,z) = \tribkt{P,Q,R} \;\;\;
+\]
+$P,Q,R$ are functions of $(x,y,z)$
+\[
+\divg \textbf{F} = \pypx{P}{x} + \pypx{Q}{y} + \pypx{R}{z}
+\]
+\[
+\curl \textbf{F} = \tribkt{R_y - Q_z,P_z - R_x,Q_x - P_y}
+\]
+\subsection{Product Rules}
+There are six product rules, two for gradients:
+
+(i) \[
+\nabla (fg) = f \nabla g + g \nabla f,
+\]
+
+(ii) \[
+\nabla (\mathbf{A} \cdot \mathbf{B}) = \mathbf{A} \times (\nabla \times \mathbf{B}) + \mathbf{B} \times (\nabla \times \mathbf{A}) + (\mathbf{A} \cdot \nabla)\mathbf{B} + (\mathbf{B} \cdot \nabla)\mathbf{A},
+\]
+
+two for divergences:
+
+(iii) \[
+\nabla \cdot (f \mathbf{A}) = f (\nabla \cdot \mathbf{A}) + \mathbf{A} \cdot (\nabla f),
+\]
+
+(iv) \[
+\nabla \cdot (\mathbf{A} \times \mathbf{B}) = \mathbf{B} \cdot (\nabla \times \mathbf{A}) - \mathbf{A} \cdot (\nabla \times \mathbf{B}),
+\]
+
+and two for curls:
+
+(v) \[
+\nabla \times (f \mathbf{A}) = f (\nabla \times \mathbf{A}) - \mathbf{A} \times (\nabla f),
+\]
+
+(vi) \[
+\nabla \times (\mathbf{A} \times \mathbf{B}) = (\mathbf{B} \cdot \nabla)\mathbf{A} - (\mathbf{A} \cdot \nabla)\mathbf{B} + \mathbf{A} (\nabla \cdot \mathbf{B}) - \mathbf{B} (\nabla \cdot \mathbf{A}).
+\]
+
+
+\subsection{Fundamental Theorem for Gradients}
+\[
+\int_{a}^{b} (\nabla T) \cdot d\mathbf{l} = T(b) - T(a)
+\]
+Where $T(x, y, z)$ is a scalar function, points $\mathbf{a}$ and $\textbf{b}$ are the beginning and end points of the path taken. Note, the path independence $\oint (\nabla T) \cdot d\mathbf{l} = 0
+$. 
+
+\subsection{Fundamental Theorem for Divergences}
+\[
+\int_V (\nabla \cdot \mathbf{v}) \, d\tau = \oint_S \mathbf{v} \cdot d\mathbf{a}
+\]
+Notice that the boundary term is itself an integral (specifically, a surface
+integral). This is reasonable: the “boundary” of a line is just two end points, but
+the boundary of a volume is a (closed) surface.
+
+\subsection{Fundamental Theorem for Curls}
+\[
+\int_S (\nabla \times \mathbf{v}) \cdot d\mathbf{a} = \oint_P \mathbf{v} \cdot d\mathbf{l}
+\]
+Note that $\int_S (\nabla \times \mathbf{v}) \cdot d\mathbf{a}$ is independent of the particular surface, only depends on the boundary line. $\oint_S (\nabla \times \mathbf{v}) \cdot d\mathbf{a}=0$ for any closed surface, since the
+boundary line, like the mouth of a balloon, shrinks down to a point, and hence the right side of equation goes to zero.
+\subsection{Curvilinear Coordinates}
+\subsubsection{Spherical Coordinates}
+Their relation to Cartesian coordinates:
+\[
+x = r \sin \theta \cos \varphi, \quad
+y = r \sin \theta \sin \varphi, \quad
+z = r \cos \theta.
+\]
+The unit vectors $\mathbf{\hat{r},\hat{\theta}, \hat{\varphi}}$ in terms or Cartesian unit vectors:
+\begin{align*}
+\hat{r} &= \sin \theta \cos \varphi \, \hat{x} + \sin \theta \sin \varphi \, \hat{y} + \cos \theta \, \hat{z}, \\
+\hat{\theta} &= \cos \theta \cos \varphi \, \hat{x} + \cos \theta \sin \varphi \, \hat{y} - \sin \theta \, \hat{z}, \\
+\hat{\varphi} &= -\sin \varphi \, \hat{x} + \cos \varphi \, \hat{y}.
+\end{align*}
+Beware of differentiating a vector that is expressed in
+spherical coordinates, since the unit vectors themselves are functions of position. Thus the general infinitesimal displacement \( d\mathbf{l} \) is
+
+\[
+d\mathbf{l} = dr \, \mathbf{\hat{r}} + r \, d\theta \, \mathbf{\hat{\theta}} + r \sin \theta \, d\varphi \, \mathbf{\hat{\varphi}}.
+\]
+
+Here are the vector derivatives in spherical coordinates:
+
+\textbf{Gradient:}
+
+\[
+\nabla T = \frac{\partial T}{\partial r} \mathbf{\hat{r}} + \frac{1}{r} \frac{\partial T}{\partial \theta} \mathbf{\hat{\theta}} + \frac{1}{r \sin \theta} \frac{\partial T}{\partial \varphi} \mathbf{\hat{\varphi}}
+\]
+
+\textbf{Divergence:}
+
+\[
+\nabla \cdot \mathbf{v} = \frac{1}{r^2} \frac{\partial}{\partial r} (r^2 v_r) + \frac{1}{r \sin \theta} \frac{\partial}{\partial \theta} (\sin \theta v_\theta) + \frac{1}{r \sin \theta} \frac{\partial v_\varphi}{\partial \varphi}
+\]
+
+\textbf{Curl:}
+
+\[
+\nabla \times \mathbf{v} = \frac{1}{r \sin \theta} \left( \frac{\partial}{\partial \theta} (\sin \theta v_\varphi) - \frac{\partial v_\theta}{\partial \varphi} \right) \mathbf{\hat{r}} + \frac{1}{r} \left( \frac{1}{\sin \theta} \frac{\partial v_r}{\partial \varphi} - \frac{\partial}{\partial r} (r v_\varphi) \right) \mathbf{\hat{\theta}} + \frac{1}{r} \left( \frac{\partial}{\partial r} (r v_\theta) - \frac{\partial v_r}{\partial \theta} \right) \mathbf{\hat{\varphi}}
+\]
+
+\textbf{Laplacian:}
+
+\[
+\nabla^2 T = \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial T}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial T}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 T}{\partial \varphi^2}
+\]
+
+\subsubsection{Cylindrical Coordinates}
+Their relation to Cartesian coordinates:
+\[
+x = s \cos \varphi, \quad
+y = s \sin \varphi, \quad
+z = z.
+\]
+The unit vectors $\mathbf{\hat{s}, \hat{\varphi}, \hat{z}}$ in terms or Cartesian unit vectors:
+\begin{align*}
+\mathbf{\hat{s}} &= \cos \varphi \, \mathbf{\hat{x}} + \sin \varphi \, \mathbf{\hat{y}}, \\
+\mathbf{\hat{\varphi}} &= -\sin \varphi \, \mathbf{\hat{x}} + \cos \varphi \, \mathbf{\hat{y}}, \\
+\mathbf{\hat{z}} &= \mathbf{\hat{z}}.
+\end{align*}
+The infinitesimal displacement:
+\[
+d\mathbf{l} = ds \, \mathbf{\hat{s}} + s \, d\varphi \, \mathbf{\hat{\varphi}} + dz \, \mathbf{\hat{z}}
+\]
+
+The vector derivatives in cylindrical coordinates are:
+
+\textbf{Gradient:}
+
+\[
+\nabla T = \frac{\partial T}{\partial s} \, \mathbf{\hat{s}} + \frac{1}{s} \frac{\partial T}{\partial \varphi} \, \mathbf{\hat{\varphi}} + \frac{\partial T}{\partial z} \, \mathbf{\hat{z}}
+\]
+
+\textbf{Divergence:}
+
+\[
+\nabla \cdot \mathbf{v} = \frac{1}{s} \frac{\partial}{\partial s} (s v_s) + \frac{1}{s} \frac{\partial v_{\varphi}}{\partial \varphi} + \frac{\partial v_{z}}{\partial z}
+\]
+
+\textbf{Curl:}
+
+\[
+\nabla \times \mathbf{v} = \left( \frac{1}{s} \frac{\partial v_{z}}{\partial \varphi} - \frac{\partial v_{\varphi}}{\partial z} \right) \mathbf{\hat{s}} + \left( \frac{\partial v_{s}}{\partial z} - \frac{\partial v_{z}}{\partial s} \right) \mathbf{\hat{\varphi}} + \frac{1}{s} \left( \frac{\partial}{\partial s} (s v_{\varphi}) - \frac{\partial v_{s}}{\partial \varphi} \right) \mathbf{\hat{z}}
+\]
+
+\textbf{Laplacian:}
+
+\[
+\nabla^2 T = \frac{1}{s} \frac{\partial}{\partial s} \left( s \frac{\partial T}{\partial s} \right) + \frac{1}{s^2} \frac{\partial^2 T}{\partial \varphi^2} + \frac{\partial^2 T}{\partial z^2}
+\]
+
+
+\end{document}
+
